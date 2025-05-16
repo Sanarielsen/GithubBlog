@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { devices } from '../utils/devices'
+
+import { devices } from '@globalUtils/devices'
 
 export const ResoluctionTest = styled.div`
 
