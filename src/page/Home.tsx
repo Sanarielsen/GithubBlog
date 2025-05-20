@@ -1,8 +1,11 @@
+import { CardProfile } from "@globalComponents/CardProfile";
+import { Container } from "@globalStyles/HomeContainer";
+
 export function Home() {
 
   return (
-    <>
-      Hellow World
-    </>
+    <Container>
+      <CardProfile />
+    </Container>
   )
 }
