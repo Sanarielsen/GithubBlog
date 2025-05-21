@@ -21,8 +21,3 @@ export const Container = styled.section`
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `
-
-export const PostSlot = styled.article`
-
-  background: ${ props => props.theme["gray-700"] };
-`
