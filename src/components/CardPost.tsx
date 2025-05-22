@@ -10,12 +10,13 @@ interface PostProps {
 
 interface CardPostProps {
   post: PostProps
+  onClickCard: (id: number) => void;
 }
 
-export function CardPost({post}: CardPostProps) {
+export function CardPost({post, onClickCard}: CardPostProps) {
 
   return (
-    <Container>
+    <Container onClick={() => onClickCard(post.id)}>
       <PostHeader>
         <h4 id={"postTitle" + post.id}>
           {post.title}

@@ -1,5 +1,6 @@
 import { CardPost } from "@globalComponents/CardPost";
 import { Container } from "@globalStyles/CardPostsContainer";
+import { useNavigate } from "react-router-dom";
 
 const postsMocked = [
   { id: 1, title: 'A importância de utilizar tags semânticas', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae pharetra sapien. Morbi at neque nibh. Nunc a semper purus. Nullam sodales sed magna id imperdiet. Sed quis blandit purus.', createdAt: '2025-05-16T13:00:49.026Z' },
@@ -11,10 +12,14 @@ const postsMocked = [
 ]
 
 export function CardPosts() {
+  const navigate = useNavigate();
+
   return (
     <Container>
        { postsMocked.map( post => (
-          <CardPost key={post.id} post={post} />
+          <CardPost key={post.id} post={post} onClickCard={(id) => 
+            navigate(`/post/${id}`)
+          } />
        ) ) }
 
        { /* Cria uma páginacao aqui caso houver mais que x quantidade por resolucao */ }
