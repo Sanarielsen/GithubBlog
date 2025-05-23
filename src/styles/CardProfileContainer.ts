@@ -34,6 +34,12 @@ export const CardImage = styled.div`
   justify-content: center;
   padding: 16px 0;
 
+  img {
+    width: 140px;
+    heigh: 140px;
+    border-radius: 8px;
+  }
+
   @media ${devices.mobileL} {
     
     padding: 32px 0;
