@@ -28,6 +28,7 @@
       "@globalComponents/*": ["./src/components/*"],
       "@globalLayouts/*": ["./src/layouts/*"],
       "@globalAssets/*": ["./src/assets/*"],
+      "@globalQueries/*": ["./src/api/*"],
       "@globalStyles/*": ["./src/styles/*"],
       "@globalTypes/*": ["./src/types/*"],
       "@globalUtils/*": ["./src/utils/*"]
