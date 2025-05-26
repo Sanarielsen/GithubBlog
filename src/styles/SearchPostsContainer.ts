@@ -22,7 +22,7 @@ export const SearchHeader = styled.div`
   }
 `;
 
-export const SearchComponent = styled.div`
+export const SearchComponent = styled.form`
     
   input {
     background: ${ props => props.theme["black"] };
