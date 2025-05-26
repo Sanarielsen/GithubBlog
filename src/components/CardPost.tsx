@@ -1,15 +1,10 @@
 import { Container, PostDescription, PostHeader } from "@globalStyles/CardPostContainer";
+import type { IssuePost } from "@globalTypes/posts";
 import { getSinceTheDateHappen } from "@globalUtils/dateFormatter";
-
-interface PostProps {
-  id: number;
-  title: string;
-  description: string;
-  createdAt: string;
-}
+import ReactMarkdown from "react-markdown";
 
 interface CardPostProps {
-  post: PostProps
+  post: IssuePost
   onClickCard: (id: number) => void;
 }
 
@@ -25,10 +20,8 @@ export function CardPost({post, onClickCard}: CardPostProps) {
           {getSinceTheDateHappen(post.createdAt)}
         </span>        
       </PostHeader>
-      <PostDescription>
-        <p id={"postDescription" + post.id}>
-          {post.description}
-        </p>
+      <PostDescription>        
+        <ReactMarkdown>{post.description}</ReactMarkdown>        
       </PostDescription>      
     </Container>
   )

@@ -1,6 +1,11 @@
 import { Container, SearchComponent, SearchHeader } from "@globalStyles/SearchPostsContainer";
 
-export function SearchPosts() {
+interface SearchPostsProps {
+  totalPosts: number | null;
+  onSearchPosts: (searchFor: string) => void;
+}
+
+export function SearchPosts({ totalPosts, onSearchPosts }: SearchPostsProps ) {   
 
   return (
     <Container>
@@ -9,11 +14,11 @@ export function SearchPosts() {
           Publicações
         </p>
         <span>
-          6 publicações
+          {totalPosts} publicações realizadas
         </span>
       </SearchHeader>
       <SearchComponent>
-        <input type="text" name="itxSearchPost" placeholder="Buscar conteúdo"/>
+        <input type="text" name="itxSearchPost" placeholder="Buscar conteúdo" onChange={(e) => onSearchPosts(e.target.value)}/>
       </SearchComponent>
     </Container>
   )

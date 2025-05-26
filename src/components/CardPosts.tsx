@@ -1,22 +1,50 @@
-import { CardPost } from "@globalComponents/CardPost";
-import { Container } from "@globalStyles/CardPostsContainer";
 import { useNavigate } from "react-router-dom";
 
-const postsMocked = [
-  { id: 1, title: 'A importância de utilizar tags semânticas', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae pharetra sapien. Morbi at neque nibh. Nunc a semper purus. Nullam sodales sed magna id imperdiet. Sed quis blandit purus.', createdAt: '2025-05-16T13:00:49.026Z' },
-  { id: 2, title: 'Comunicação é uma skill subestimada?', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae pharetra sapien. Morbi at neque nibh. Nunc a semper purus. Nullam sodales sed magna id imperdiet. Sed quis blandit purus.', createdAt: '2025-05-17T13:01:49.026Z' },
-  { id: 3, title: 'Trabalhando com uma grande massa de dados', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae pharetra sapien. Morbi at neque nibh. Nunc a semper purus. Nullam sodales sed magna id imperdiet. Sed quis blandit purus.', createdAt: '2025-05-18T13:02:49.026Z' },
-  { id: 4, title: 'Simplificando o básico do Git e Github', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae pharetra sapien. Morbi at neque nibh. Nunc a semper purus. Nullam sodales sed magna id imperdiet. Sed quis blandit purus. Nunc imperdiet tincidunt erat id sollicitudin. Etiam elementum pretium cursus. Sed faucibus arcu eget dolor congue suscipit. Nam vehicula luctus dui, in finibus lacus. Proin at scelerisque dolor. Aenean tortor massa, tempus sit amet euismod a, egestas ut arcu. ', createdAt: '2025-05-19T13:03:49.026Z' },
-  { id: 5, title: 'Criando um Scroll Infinite Performático', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae pharetra sapien. Morbi at neque nibh. Nunc a semper purus. Nullam sodales sed magna id imperdiet. Sed quis blandit purus.', createdAt: '2025-05-20T13:04:49.026Z' },
-  { id: 6, title: 'Iniciando na area do Open Source', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae pharetra sapien. Morbi at neque nibh. Nunc a semper purus. Nullam sodales sed magna id imperdiet. Sed quis blandit purus.', createdAt: '2025-05-21T13:32:10.966Z' },
-]
+import { CardPost } from "@globalComponents/CardPost";
+import { Container } from "@globalStyles/CardPostsContainer";
+import type { UseQueryResult } from "@tanstack/react-query";
+import type { IssuePost } from "@globalTypes/posts";
 
-export function CardPosts() {
+interface CardPostsProps {
+  listPosts: UseQueryResult<IssuePost[], Error>
+  searchFor: string | null;
+}
+
+export function CardPosts({ listPosts, searchFor }: CardPostsProps) {
   const navigate = useNavigate();
+
+  const { isPending, isError, error, data: posts } = listPosts
+
+  //FEATURE: Create a loading component, error component and empty data component
+  if (isPending) 
+    return (
+      <Container>
+        <p>Loading...</p>
+      </Container>
+    )
+  if (isError)
+    return (
+      <Container>
+        <p>Error: {error.message}</p>
+      </Container>
+    )     
+  if (!posts) 
+    return (
+      <Container>
+        <p>No data</p>  
+      </Container>
+    )
+
+  const filteredPosts = searchFor && searchFor.trim() !== ""
+    ? posts.filter(
+      post =>
+        post.title.toLowerCase().includes(searchFor.toLowerCase()) ||
+        post.description.toLowerCase().includes(searchFor.toLowerCase())
+    ) : posts;
 
   return (
     <Container>
-       { postsMocked.map( post => (
+       { filteredPosts.map( post => (
           <CardPost key={post.id} post={post} onClickCard={(id) => 
             navigate(`/post/${id}`)
           } />
