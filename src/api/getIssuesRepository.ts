@@ -27,7 +27,7 @@ const getRepositoryIssues = async (): Promise<IssuePost[]> => {
   })
 
   return response.data.map((post: any) => ({
-    id: post.id,
+    id: post.number,
     title: post.title,
     description: post.body,
     createdAt: post.created_at

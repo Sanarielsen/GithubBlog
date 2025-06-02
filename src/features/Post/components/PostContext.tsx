@@ -1,9 +1,15 @@
+import ReactMarkdown from "react-markdown";
+
 import { Container } from "@features/Post/styles/PostContextContainer";
 
-export function PostContext() {
+interface PostContainerProps {
+  context: string;
+}
+
+export function PostContext( {context}: PostContainerProps ) {
   return (
     <Container>
-      <p> Aqui vai ficar o conteúdo da ISSUE selecionada </p>
+      <ReactMarkdown>{context}</ReactMarkdown>
     </Container>
   )
 }

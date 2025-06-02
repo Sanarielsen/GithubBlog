@@ -1,7 +1,8 @@
+import ReactMarkdown from "react-markdown";
+
 import { Container, PostDescription, PostHeader } from "@globalStyles/CardPostContainer";
 import type { IssuePost } from "@globalTypes/posts";
 import { getSinceTheDateHappen } from "@globalUtils/dateFormatter";
-import ReactMarkdown from "react-markdown";
 
 interface CardPostProps {
   post: IssuePost
