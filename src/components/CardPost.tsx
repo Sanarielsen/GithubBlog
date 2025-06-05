@@ -11,6 +11,13 @@ interface CardPostProps {
 
 export function CardPost({post, onClickCard}: CardPostProps) {
 
+  const maxLength = 200;
+  
+  const shortDescription =
+    post.description.length > maxLength
+      ? post.description.slice(0, maxLength) + "..."
+      : post.description;
+
   return (
     <Container onClick={() => onClickCard(post.id)}>
       <PostHeader>
@@ -22,7 +29,7 @@ export function CardPost({post, onClickCard}: CardPostProps) {
         </span>        
       </PostHeader>
       <PostDescription>        
-        <ReactMarkdown>{post.description}</ReactMarkdown>        
+        <ReactMarkdown>{shortDescription}</ReactMarkdown>        
       </PostDescription>      
     </Container>
   )
