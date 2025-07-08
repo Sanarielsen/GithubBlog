@@ -1,5 +1,6 @@
 import { CardPosts } from "@globalComponents/CardPosts";
 import { CardProfile } from "@globalComponents/CardProfile";
+import { LoadingCircle } from "@globalComponents/LoadingCircle";
 import { SearchPosts } from "@globalComponents/SearchPosts";
 import { useRepositoryIssues } from "@globalQueries/getIssuesRepository";
 
@@ -19,10 +20,16 @@ export function Home() {
         totalPosts={totalPosts} 
         onSearchPosts={(searchString) => setSearchFor(searchString)} 
       />
-      <CardPosts 
-        listPosts={queryPosts} 
-        searchFor={searchFor}
-      />
+      { queryPosts.isLoading ? (
+
+        <LoadingCircle />
+      ) : (        
+        <CardPosts 
+          listPosts={queryPosts} 
+          searchFor={searchFor}
+        />
+      ) }
+
     </Container>
   )
 }

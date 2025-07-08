@@ -4,6 +4,7 @@ import logoCompany from "@globalAssets/images/CompanyLogo.svg"
 import logoFollow from "@globalAssets/images/FollowLogo.svg"
 import logoGithub from "@globalAssets/images/GithubLogo.svg"
 import iconeRedirect from "@globalAssets/images/RedirectIcone.svg"
+import { LoadingCircle } from "@globalStyles/LoadingContainer";
 
 export function CardProfile() {
 
@@ -13,7 +14,7 @@ export function CardProfile() {
   if (isPending) 
     return (
       <Container>
-        <p>Loading...</p>
+        <LoadingCircle />
       </Container>
     )
   if (isError)

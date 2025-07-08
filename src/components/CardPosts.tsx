@@ -13,25 +13,12 @@ interface CardPostsProps {
 export function CardPosts({ listPosts, searchFor }: CardPostsProps) {
   const navigate = useNavigate();
 
-  const { isPending, isError, error, data: posts } = listPosts
+  const { data: posts } = listPosts
 
-  //FEATURE: Create a loading component, error component and empty data component
-  if (isPending) 
-    return (
-      <Container>
-        <p>Loading...</p>
-      </Container>
-    )
-  if (isError)
-    return (
-      <Container>
-        <p>Error: {error.message}</p>
-      </Container>
-    )     
   if (!posts) 
     return (
       <Container>
-        <p>No data</p>  
+        <p>Sem posts...</p>  
       </Container>
     )
 
